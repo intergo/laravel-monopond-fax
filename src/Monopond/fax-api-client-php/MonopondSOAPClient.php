@@ -52,12 +52,12 @@
 					$document = $this->removeNullValues($document);
 				}
 
-				if(!$document->DitheringTechnique) {
+				if(@!$document->DitheringTechnique) {
 					$document = $this->removeNullValues($document);
 				}
 
 				$documentXmlString = '<Document>';
-				if($document->DocumentRef != null) {
+				if(@$document->DocumentRef != null) {
 					$documentXmlString .= '<DocumentRef>'.$document->DocumentRef.'</DocumentRef>';
 				}
 
@@ -69,9 +69,9 @@
 					$documentXmlString .= '<FileData>'.$document->FileData.'</FileData>';
 				}
 
-				$documentXmlString .= '<Order>'.$document->Order.'</Order>';
+				$documentXmlString .= '<Order>'.@$document->Order.'</Order>';
 
-				if($document->DitheringTechnique != null) {
+				if(@$document->DitheringTechnique != null) {
 					$documentXmlString .= '<DitheringTechnique>'.$document->DitheringTechnique.'</DitheringTechnique>';
 				}
 
@@ -257,7 +257,7 @@
 					$faxMessage->Documents = $this->convertDocumentArrayToSoapArray($faxMessage->Documents);    
 				}
 
-				if($faxMessage->Blocklists != null) {
+				if(@$faxMessage->Blocklists != null) {
 					$blocklist = $this->createBlocklistElement($faxMessage->Blocklists);
 					$faxMessage->Blocklists = new SoapVar($blocklist, XSD_ANYXML);
 				}
@@ -266,7 +266,7 @@
 				$soapFaxMessages[] = new SoapVar($faxMessage,SOAP_ENC_OBJECT,null,null,"FaxMessage");
 			}
 
-			if($SendFaxRequest->Blocklists != null) {
+			if(@$SendFaxRequest->Blocklists != null) {
 				$blocklist = $this->createBlocklistElement($SendFaxRequest->Blocklists);
 				$SendFaxRequest->Blocklists = new SoapVar($blocklist, XSD_ANYXML);
 			}
