@@ -3,7 +3,7 @@
 namespace Balgf\LaravelMonopondFax;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use MonopondSOAPClientV2;
+use MonopondSOAPClientV2_1;
 use MPENV;
 
 class ServiceProvider extends BaseServiceProvider {
