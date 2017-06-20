@@ -1,4 +1,6 @@
-<?php namespace Balgf\LaravelMonopondFax;
+<?php 
+
+namespace Balgf\LaravelMonopondFax;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use MonopondSOAPClientV2;
@@ -30,7 +32,7 @@ class ServiceProvider extends BaseServiceProvider {
     {
         $this->app->bind('laravel-monopond-fax',function(){
             $environment = config('monopond.environment');
-            return new MonopondSOAPClientV2(config('monopond.username'), config('monopond.password'), constant("MPENV::{$environment}"));
+            return new MonopondSOAPClientV2_1(config('monopond.username'), config('monopond.password'), constant("MPENV::{$environment}"));
         });
     }
 
