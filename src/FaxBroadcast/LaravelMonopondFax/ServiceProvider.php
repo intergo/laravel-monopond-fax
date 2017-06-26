@@ -27,7 +27,7 @@ class ServiceProvider extends BaseServiceProvider {
     {
         $this->app->bind('monopond-fax',function(){
             $environment = config('monopond.environment');
-            return new MonopondSOAPClientV2_1(config('monopond.username'), config('monopond.password'), constant("FaxBroadcast\LaravelMonopondFax\MPENV::{$environment}"));
+            return new MonopondSOAPClientV2_1(config('monopond.username'), config('monopond.new_password'), constant("FaxBroadcast\LaravelMonopondFax\MPENV::{$environment}"));
         });
     }
 
