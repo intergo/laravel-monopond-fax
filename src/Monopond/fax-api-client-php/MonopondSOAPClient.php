@@ -17,7 +17,7 @@
 			// Setting up SOAP ready headers with authentication
 			$WSSEAuth = new SoapVar(array('ns1:Username' => $this->_username,'ns1:Password' => $this->_password),
 									SOAP_ENC_OBJECT,NULL,$this->_strWSSENS,NULL, $this->_strWSSENS);
-			$WSSEToken = new clsWSSEToken($WSSEAuth);
+			$WSSEToken = new \FaxBroadcast\LaravelMonopondFax\clsWSSEToken($WSSEAuth);
 			$SoapVarWSSEToken = new SoapVar($WSSEToken,SOAP_ENC_OBJECT,NULL,$this->_strWSSENS,NULL,$this->_strWSSENS);
 			$SoapVarHeaderVal=new SoapVar($SoapVarWSSEToken,SOAP_ENC_OBJECT,NULL,$this->_strWSSENS,NULL,$this->_strWSSENS);
 			$SoapHeader = new SoapHeader($this->_strWSSENS,'Security',$SoapVarHeaderVal,true);
@@ -305,7 +305,7 @@
 			
 			$messagesResponses = $element->Body->SendFaxResponse->FaxMessages;
 
-			return new MonopondSendFaxResponse($messagesResponses);
+			return new \FaxBroadcast\LaravelMonopondFax\MonopondSendFaxResponse($messagesResponses);
 		}
 			
 		public function faxStatus($faxStatusRequest) {
@@ -327,7 +327,7 @@
 			$element = new SimpleXMLElement($XMLResponseString);
 
 			$messagesResponses = $element->Body->FaxStatusResponse;
-			return new MonopondFaxStatusResponse($messagesResponses);         
+			return new \FaxBroadcast\LaravelMonopondFax\MonopondFaxStatusResponse($messagesResponses);         
 		}
 
 		public function stopFax($stopFaxRequest) {
@@ -350,7 +350,7 @@
 
 			$messagesResponses = $element->Body->StopFaxResponse;
 
-			return new MonopondStopFaxResponse($messagesResponses);         
+			return new \FaxBroadcast\LaravelMonopondFax\MonopondStopFaxResponse($messagesResponses);         
 		}
 
 		public function pauseFax($pauseFaxRequest) {
@@ -375,7 +375,7 @@
 			$messagesResponses = $element->Body->PauseFaxResponse;
 
 
-			return new MonopondPauseFaxResponse($messagesResponses);         
+			return new \FaxBroadcast\LaravelMonopondFax\MonopondPauseFaxResponse($messagesResponses);         
 		}
 
 		public function resumeFax($resumeFaxRequest) {
@@ -399,7 +399,7 @@
 
 			$messagesResponses = $element->Body->ResumeFaxResponse;
 
-			return new MonopondResumeFaxResponse($messagesResponses);         
+			return new \FaxBroadcast\LaravelMonopondFax\MonopondResumeFaxResponse($messagesResponses);         
 		}
 
 		public function saveFaxDocument($saveFaxDocumentRequest) {
@@ -421,7 +421,7 @@
 			$element = new SimpleXMLElement($XMLResponseString);
 
 			$messagesResponses = $element->Body->SaveFaxDocumentResponse;
-			return new MonopondSaveFaxDocumentResponse($messagesResponses); 
+			return new \FaxBroadcast\LaravelMonopondFax\MonopondSaveFaxDocumentResponse($messagesResponses); 
 		}
 
 		public function faxDocumentPreview($faxDocumentPreviewRequest) {
@@ -456,7 +456,7 @@
 			$element = new SimpleXMLElement($XMLResponseString);
 
 			$messagesResponses = $element->Body->FaxDocumentPreviewResponse;
-			return new MonopondFaxDocumentPreviewResponse($messagesResponses); 
+			return new \FaxBroadcast\LaravelMonopondFax\MonopondFaxDocumentPreviewResponse($messagesResponses); 
 		}
 
 		public function deleteFaxDocument($deleteFaxDocumentRequest) {
@@ -486,7 +486,7 @@
 			$element = new SimpleXMLElement($XMLResponseString);
 
 			$messagesResponses = $element->Body->DeleteFaxDocumentResponse;
-			return new MonopondDeleteFaxDocumentResponse($messagesResponses); 
+			return new \FaxBroadcast\LaravelMonopondFax\MonopondDeleteFaxDocumentResponse($messagesResponses); 
 		}
 	}
 ?>

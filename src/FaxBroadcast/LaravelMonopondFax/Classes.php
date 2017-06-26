@@ -106,7 +106,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		function __construct($response) {
 			$this->attempt = (string)$response["attempt"][0];
 			$this->result = (string)$response["result"][0];
-			$this->error = new MonopondFaxErrorResponse($response->Error);
+			$this->error = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxErrorResponse($response->Error);
 			$this->cost = (string)$response["cost"][0];
 			$this->pages = (string)$response["pages"][0];
 			$this->scheduledStartTime = (string)$response["scheduledStartTime"][0];
@@ -142,12 +142,12 @@ namespace FaxBroadcast\LaravelMonopondFax;
 			$this->messageRef = (string)$faxMessageResponse["messageRef"][0];
 
 			if ($faxMessageResponse->FaxDetails != null) {
-			   $this->faxDetails = new MonopondFaxDetailsResponse($faxMessageResponse->FaxDetails);
+			   $this->faxDetails = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxDetailsResponse($faxMessageResponse->FaxDetails);
 			}
 
 			if (!empty($faxMessageResponse->FaxResults)) {
 			   foreach($faxMessageResponse->FaxResults->FaxResult as $faxResult) {
-				$this->faxResults[] = new MonopondFaxResultsResponse($faxResult);
+				$this->faxResults[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxResultsResponse($faxResult);
 			   }
 			}
 		}
@@ -177,7 +177,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 
 		function __construct($responses) {
 			foreach($responses->FaxMessage as $response) {
-				$this->FaxMessages[] = new MonopondFaxMessageResponse($response);
+				$this->FaxMessages[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxMessageResponse($response);
 			}   
 		}
 	}
@@ -196,12 +196,12 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $FaxMessages;
 
 		function __construct($response) {
-			$this->FaxStatusTotals = new MonopondFaxStatusTotalsResponse($response->FaxStatusTotals);
-			$this->FaxResultsTotals = new MonopondFaxResultsTotalsResponse($response->FaxResultsTotals);
+			$this->FaxStatusTotals = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxStatusTotalsResponse($response->FaxStatusTotals);
+			$this->FaxResultsTotals = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxResultsTotalsResponse($response->FaxResultsTotals);
 
 			if (!empty($response->FaxMessages)) {
 			   foreach ($response->FaxMessages->FaxMessage as $faxMessage) {                
-				$this->FaxMessages[] =  new MonopondFaxMessageResponse($faxMessage);
+				$this->FaxMessages[] =  new \FaxBroadcast\LaravelMonopondFax\MonopondFaxMessageResponse($faxMessage);
 			   } 
 			}
 		}
@@ -265,7 +265,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		
 		function __construct($responses) {
 			foreach($responses->FaxMessages->FaxMessage as $response) {
-				$this->FaxMessages[] = new MonopondFaxMessageResponse($response);
+				$this->FaxMessages[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxMessageResponse($response);
 			}   
 		}
 	}
@@ -282,7 +282,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		
 		function __construct($responses) {
 			foreach($responses->FaxMessages->FaxMessage as $response) {
-				$this->FaxMessages[] = new MonopondFaxMessageResponse($response);
+				$this->FaxMessages[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxMessageResponse($response);
 			}   
 		}
 	}
@@ -299,7 +299,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		
 		function __construct($responses) {
 			foreach($responses->FaxMessages->FaxMessage as $response) {
-				$this->FaxMessages[] = new MonopondFaxMessageResponse($response);
+				$this->FaxMessages[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxMessageResponse($response);
 			}   
 		}
 	}
