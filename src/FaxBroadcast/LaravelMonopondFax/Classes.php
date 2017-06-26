@@ -343,4 +343,14 @@ namespace FaxBroadcast\LaravelMonopondFax;
 	class MonopondDeleteFaxDocumentResponse {
 
 	}
+	
+	class Test {
+
+	}
+	
+	class test2 {
+		function __construct() {
+			$a = new Test;
+		}
+	}
 ?>
