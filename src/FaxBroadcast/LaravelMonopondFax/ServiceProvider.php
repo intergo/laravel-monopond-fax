@@ -15,12 +15,7 @@ class ServiceProvider extends BaseServiceProvider {
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../../config/monopond.php' => config_path('monopond.php'),
-        ]);
-        $this->mergeConfigFrom(
-            __DIR__ . '/../../config/monopond.php', 'monopond'
-        );
+        
     }
 
     /**
