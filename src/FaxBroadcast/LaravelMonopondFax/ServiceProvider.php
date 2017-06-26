@@ -4,7 +4,8 @@ namespace FaxBroadcast\LaravelMonopondFax;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use MonopondSOAPClientV2_1;
-use MPENV;
+//use MPENV;
+use MonopondClasses\MPENV;
 
 class ServiceProvider extends BaseServiceProvider {
 

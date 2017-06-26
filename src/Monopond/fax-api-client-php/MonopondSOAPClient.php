@@ -490,7 +490,6 @@
 		}
 	}         
 	
-	namespace MonopondClasses;
 	class MPENV {
 		const PRODUCTION = "https://api.monopond.com/fax/soap/v2.1/?wsdl";
 		const PRODUCTION_MONOPOND = "https://faxapi.monopond.com/api/fax/v2.1?wsdl";
