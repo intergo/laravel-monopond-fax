@@ -345,12 +345,12 @@ namespace FaxBroadcast\LaravelMonopondFax;
 	}
 	
 	class Test {
-
+		function __construct() {
+			$a = new Test2;
+		}
 	}
 	
-	class test2 {
-		function __construct() {
-			$a = new Test;
-		}
+	class Test2 {
+		
 	}
 ?>
