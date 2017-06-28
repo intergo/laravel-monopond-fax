@@ -65,7 +65,7 @@
 					$documentXmlString .= '<FileName>'.$document->FileName.'</FileName>';
 				}
 
-				if($document->FileData != null) {
+				if(@$document->FileData != null) {
 					$documentXmlString .= '<FileData>'.$document->FileData.'</FileData>';
 				}
 
