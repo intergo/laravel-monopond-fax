@@ -62,33 +62,24 @@
 				}
 				
 				if (property_exists($document, 'FileName')) {
-					if (isset(@$document->FileName)) {
-						if(@$document->FileName != null) { // undefined sometimes
-							$documentXmlString .= '<FileName>'.$document->FileName.'</FileName>';
-						}
+					if(@$document->FileName != null) { // undefined sometimes
+						$documentXmlString .= '<FileName>'.$document->FileName.'</FileName>';
 					}
 				}
 				
 				if (property_exists($document, 'FileData')) {
-					if (isset(@$document->FileData)) {
-						if(@$document->FileData != null) { // undefined sometimes
-							$documentXmlString .= '<FileData>'.$document->FileData.'</FileData>';
-						}
+					if(@$document->FileData != null) { // undefined sometimes
+						$documentXmlString .= '<FileData>'.$document->FileData.'</FileData>';
 					}
-					
 				}
 				
 				if (property_exists($document, 'Order')) {
-					if (isset(@$document->Order)) {
-						$documentXmlString .= '<Order>'.@$document->Order.'</Order>'; // undefined sometimes
-					}
+					$documentXmlString .= '<Order>'.@$document->Order.'</Order>'; // undefined sometimes
 				}
 				
 				if (property_exists($document, 'DitheringTechnique')) {
-					if (isset(@$document->DitheringTechnique)) {
-						if(@$document->DitheringTechnique != null) { // undefined sometimes
-							$documentXmlString .= '<DitheringTechnique>'.$document->DitheringTechnique.'</DitheringTechnique>';
-						}
+					if(@$document->DitheringTechnique != null) { // undefined sometimes
+						$documentXmlString .= '<DitheringTechnique>'.$document->DitheringTechnique.'</DitheringTechnique>';
 					}
 				}
 			
@@ -275,11 +266,9 @@
 				}
 				
 				if (property_exists($faxMessage, 'Blocklists')) {
-					if (isset(@$faxMessage->Blocklists)) {
-						if(@$faxMessage->Blocklists != null) { // undefined sometimes
-							$blocklist = $this->createBlocklistElement($faxMessage->Blocklists);
-							$faxMessage->Blocklists = new SoapVar($blocklist, XSD_ANYXML);
-						}
+					if(@$faxMessage->Blocklists != null) { // undefined sometimes
+						$blocklist = $this->createBlocklistElement($faxMessage->Blocklists);
+						$faxMessage->Blocklists = new SoapVar($blocklist, XSD_ANYXML);
 					}
 				}
 				
