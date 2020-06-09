@@ -299,7 +299,7 @@
 					$this->_SoapClient->SendFax($SendFaxRequest);
 			}catch (SoapFault $exception) {
 				// Print exception if one occured
-				\Log::info("Monopound SoapClient: Caught Exception ('{$exception->getMessage()}')\n{$exception}\n");
+				\Log::info("Monopond SoapClient: Caught Exception ('{$exception->getMessage()}')\n{$exception}\n");
 				print_r($exception->getMessage());
 				// Uncomment the line below to print the XML of the request just made  
 				 // print_r($this->_SoapClient->__getLastRequest());
