@@ -303,11 +303,12 @@
 				print_r($exception->getMessage());
 				// Uncomment the line below to print the XML of the request just made  
 				 // print_r($this->_SoapClient->__getLastRequest());
+				\Log::info('Monopond Request:' . $this->_SoapClient->__getLastRequest());
+                		\Log::info('Monopond Response:' . $this->_SoapClient->__getLastResponse());
 			}
 
 			// Uncomment the line below to print the XML of the request just made  
 			// print_r($this->_SoapClient->__getLastResponse());
-			\Log::info('Monopond Request:' . $this->_SoapClient->__getLastRequest());
 
 			$XMLResponseString = $this->_SoapClient->__getLastResponse();
 			$XMLResponseString = str_replace("soap:", "", $XMLResponseString);
