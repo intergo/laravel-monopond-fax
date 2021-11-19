@@ -9,7 +9,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 
 	class clsWSSEToken {
 		private $UsernameToken;
-		
+
 		function __construct ($innerVal) {
 		  $this->UsernameToken = $innerVal;
 		}
@@ -125,15 +125,15 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		}
 	}
 
-	class MonopondFaxMessageResponse {    
+	class MonopondFaxMessageResponse {
 		public $status;
 		public $sendTo;
 		public $broadcastRef;
 		public $sendRef;
 		public $messageRef;
-		public $faxDetails; 
+		public $faxDetails;
 		public $faxResults;
-	 
+
 		function __construct($faxMessageResponse) {
 			$this->status = (string)$faxMessageResponse["status"][0];
 			$this->sendTo = (string)$faxMessageResponse["sendTo"][0];
@@ -172,13 +172,13 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $TimeZone;
 	}
 
-	class MonopondSendFaxResponse{   
+	class MonopondSendFaxResponse{
 		public $FaxMessages;
 
 		function __construct($responses) {
 			foreach($responses->FaxMessage as $response) {
 				$this->FaxMessages[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxMessageResponse($response);
-			}   
+			}
 		}
 	}
 
@@ -200,9 +200,9 @@ namespace FaxBroadcast\LaravelMonopondFax;
 			$this->FaxResultsTotals = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxResultsTotalsResponse($response->FaxResultsTotals);
 
 			if (!empty($response->FaxMessages)) {
-			   foreach ($response->FaxMessages->FaxMessage as $faxMessage) {                
+			   foreach ($response->FaxMessages->FaxMessage as $faxMessage) {
 				$this->FaxMessages[] =  new \FaxBroadcast\LaravelMonopondFax\MonopondFaxMessageResponse($faxMessage);
-			   } 
+			   }
 			}
 		}
 	}
@@ -219,20 +219,22 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $stopping;
 		public $finalizing;
 		public $done;
-		
+
 		function __construct($response) {
-			$this->pending = (string)$response["pending"][0];
-			$this->processing = (string)$response["processing"][0];
-			$this->queued = (string)$response["queued"][0];
-			$this->starting = (string)$response["starting"][0];
-			$this->sending = (string)$response["sending"][0];
-			$this->pausing = (string)$response["pausing"][0];
-			$this->paused = (string)$response["paused"][0];
-			$this->resuming = (string)$response["resuming"][0];
-			$this->stopping = (string)$response["stopping"][0];
-			$this->finalizing = (string)$response["finalizing"][0];
-			$this->done = (string)$response["done"][0];
-		}        
+            if (is_array($response)) {
+                $this->pending = (string)$response["pending"][0];
+                $this->processing = (string)$response["processing"][0];
+                $this->queued = (string)$response["queued"][0];
+                $this->starting = (string)$response["starting"][0];
+                $this->sending = (string)$response["sending"][0];
+                $this->pausing = (string)$response["pausing"][0];
+                $this->paused = (string)$response["paused"][0];
+                $this->resuming = (string)$response["resuming"][0];
+                $this->stopping = (string)$response["stopping"][0];
+                $this->finalizing = (string)$response["finalizing"][0];
+                $this->done = (string)$response["done"][0];
+            }
+		}
 	}
 
 	class MonopondFaxResultsTotalsResponse {
@@ -242,14 +244,16 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $totalAttempts;
 		public $totalFaxDuration;
 		public $totalPages;
-		
+
 		function __construct($response) {
-			$this->success = (string)$response["success"][0];
-			$this->blocked = (string)$response["blocked"][0];
-			$this->failed = (string)$response["failed"][0];
-			$this->totalAttempts = (string)$response["totalAttempts"][0];
-			$this->totalFaxDuration = (string)$response["totalFaxDuration"][0];
-			$this->totalPages = (string)$response["totalPages"][0];
+            if (is_array($response)) {
+                $this->success = (string)$response["success"][0];
+                $this->blocked = (string)$response["blocked"][0];
+                $this->failed = (string)$response["failed"][0];
+                $this->totalAttempts = (string)$response["totalAttempts"][0];
+                $this->totalFaxDuration = (string)$response["totalFaxDuration"][0];
+                $this->totalPages = (string)$response["totalPages"][0];
+            }
 		}
 	}
 
@@ -262,11 +266,11 @@ namespace FaxBroadcast\LaravelMonopondFax;
 
 	class MonopondStopFaxResponse {
 		public $FaxMessages;
-		
+
 		function __construct($responses) {
 			foreach($responses->FaxMessages->FaxMessage as $response) {
 				$this->FaxMessages[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxMessageResponse($response);
-			}   
+			}
 		}
 	}
 
@@ -279,11 +283,11 @@ namespace FaxBroadcast\LaravelMonopondFax;
 
 	class MonopondPauseFaxResponse {
 		public $FaxMessages;
-		
+
 		function __construct($responses) {
 			foreach($responses->FaxMessages->FaxMessage as $response) {
 				$this->FaxMessages[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxMessageResponse($response);
-			}   
+			}
 		}
 	}
 
@@ -296,11 +300,11 @@ namespace FaxBroadcast\LaravelMonopondFax;
 
 	class MonopondResumeFaxResponse {
 		public $FaxMessages;
-		
+
 		function __construct($responses) {
 			foreach($responses->FaxMessages->FaxMessage as $response) {
 				$this->FaxMessages[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxMessageResponse($response);
-			}   
+			}
 		}
 	}
 
@@ -343,14 +347,14 @@ namespace FaxBroadcast\LaravelMonopondFax;
 	class MonopondDeleteFaxDocumentResponse {
 
 	}
-	
+
 	class Test {
 		function __construct() {
 			$a = new Test2;
 		}
 	}
-	
+
 	class Test2 {
-		
+
 	}
 ?>
