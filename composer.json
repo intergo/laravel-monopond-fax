@@ -1,5 +1,5 @@
 {
-    "name": "faxbroadcast/laravel-monopond-fax",
+    "name": "phalouvas/laravel-monopond-fax",
     "description": "Laravel package for monopond fax API client",
     "keywords": [
         "laravel",
