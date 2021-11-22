@@ -85,11 +85,11 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $headerFormat;
 
 		function __construct($response) {
-			$this->sendFrom = (string)$response["sendFrom"][0];
-			$this->resolution = (string)$response["resolution"][0];
-			$this->retries = (string)$response["retries"][0];
-			$this->busyRetries = (string)$response["busyRetries"][0];
-			$this->headerFormat = (string)$response["headerFormat"][0];
+			$this->sendFrom = isset($response["sendFrom"]) ? (string)$response["sendFrom"][0] : null;
+			$this->resolution = isset($response["resolution"]) ? (string)$response["resolution"][0] : null;
+			$this->retries = isset($response["retries"]) ? (string)$response["retries"][0] : null;
+			$this->busyRetries = isset($response["busyRetries"]) ? (string)$response["busyRetries"][0] : null;
+			$this->headerFormat = isset($response["headerFormat"]) ? (string)$response["headerFormat"][0] : null;
 		}
 	}
 
@@ -135,11 +135,11 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $faxResults;
 
 		function __construct($faxMessageResponse) {
-			$this->status = (string)$faxMessageResponse["status"][0];
-			$this->sendTo = (string)$faxMessageResponse["sendTo"][0];
-			$this->broadcastRef = (string)$faxMessageResponse["broadcastRef"][0];
-			$this->sendRef = (string)$faxMessageResponse["sendRef"][0];
-			$this->messageRef = (string)$faxMessageResponse["messageRef"][0];
+			$this->status = isset($faxMessageResponse["status"][0]) ? (string)$faxMessageResponse["status"][0] : null;
+			$this->sendTo = isset($faxMessageResponse["sendTo"][0]) ? (string)$faxMessageResponse["sendTo"][0] : null;
+			$this->broadcastRef = isset($faxMessageResponse["broadcastRef"][0]) ? (string)$faxMessageResponse["broadcastRef"][0] : null;
+			$this->sendRef = isset($faxMessageResponse["sendRef"][0]) ? (string)$faxMessageResponse["sendRef"][0] : null;
+			$this->messageRef = isset($faxMessageResponse["messageRef"][0]) ? (string)$faxMessageResponse["messageRef"][0] : null;
 
 			if ($faxMessageResponse->FaxDetails != null) {
 			   $this->faxDetails = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxDetailsResponse($faxMessageResponse->FaxDetails);
