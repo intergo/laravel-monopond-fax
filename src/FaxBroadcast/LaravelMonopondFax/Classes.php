@@ -1,6 +1,9 @@
 <?php
 namespace FaxBroadcast\LaravelMonopondFax;
-	class MPENV {
+
+use SimpleXMLElement;
+
+class MPENV {
 		const PRODUCTION = "https://api.monopond.com/fax/soap/v2.1/?wsdl";
 		const Production = "https://faxapi.monopond.com/api/fax/v2.1?wsdl";
 		const TEST = "http://test.api.monopond.com/fax/soap/v2.1/?wsdl";
@@ -85,11 +88,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $headerFormat;
 
 		function __construct($response) {
-			$this->sendFrom = isset($response["sendFrom"]) ? (string)$response["sendFrom"][0] : null;
-			$this->resolution = isset($response["resolution"]) ? (string)$response["resolution"][0] : null;
-			$this->retries = isset($response["retries"]) ? (string)$response["retries"][0] : null;
-			$this->busyRetries = isset($response["busyRetries"]) ? (string)$response["busyRetries"][0] : null;
-			$this->headerFormat = isset($response["headerFormat"]) ? (string)$response["headerFormat"][0] : null;
+            Helper::convertResponse($this, $response);
 		}
 	}
 
@@ -104,13 +103,8 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $dateCallEnded;
 
 		function __construct($response) {
-			$this->attempt = (string)$response["attempt"][0];
-			$this->result = (string)$response["result"][0];
+            Helper::convertResponse($this, $response);
 			$this->error = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxErrorResponse($response->Error);
-			$this->cost = (string)$response["cost"][0];
-			$this->pages = (string)$response["pages"][0];
-			$this->scheduledStartTime = (string)$response["scheduledStartTime"][0];
-			$this->dateCallStarted = (string)$response["dateCallEnded"][0];
 		}
 	}
 
@@ -120,8 +114,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 
 
 		function __construct($response) {
-			$this->code = (string)$response["code"][0];
-			$this->name = (string)$response["name"][0];
+            Helper::convertResponse($this, $response);
 		}
 	}
 
@@ -135,11 +128,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $faxResults;
 
 		function __construct($faxMessageResponse) {
-			$this->status = isset($faxMessageResponse["status"][0]) ? (string)$faxMessageResponse["status"][0] : null;
-			$this->sendTo = isset($faxMessageResponse["sendTo"][0]) ? (string)$faxMessageResponse["sendTo"][0] : null;
-			$this->broadcastRef = isset($faxMessageResponse["broadcastRef"][0]) ? (string)$faxMessageResponse["broadcastRef"][0] : null;
-			$this->sendRef = isset($faxMessageResponse["sendRef"][0]) ? (string)$faxMessageResponse["sendRef"][0] : null;
-			$this->messageRef = isset($faxMessageResponse["messageRef"][0]) ? (string)$faxMessageResponse["messageRef"][0] : null;
+            Helper::convertResponse($this, $faxMessageResponse);
 
 			if ($faxMessageResponse->FaxDetails != null) {
 			   $this->faxDetails = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxDetailsResponse($faxMessageResponse->FaxDetails);
@@ -196,7 +185,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $FaxMessages;
 
 		function __construct($response) {
-			$this->FaxStatusTotals = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxStatusTotalsResponse($response->FaxStatusTotals);
+            $this->FaxStatusTotals = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxStatusTotalsResponse($response->FaxStatusTotals);
 			$this->FaxResultsTotals = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxResultsTotalsResponse($response->FaxResultsTotals);
 
 			if (!empty($response->FaxMessages)) {
@@ -221,19 +210,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $done;
 
 		function __construct($response) {
-            if (is_array($response)) {
-                $this->pending = (string)$response["pending"][0];
-                $this->processing = (string)$response["processing"][0];
-                $this->queued = (string)$response["queued"][0];
-                $this->starting = (string)$response["starting"][0];
-                $this->sending = (string)$response["sending"][0];
-                $this->pausing = (string)$response["pausing"][0];
-                $this->paused = (string)$response["paused"][0];
-                $this->resuming = (string)$response["resuming"][0];
-                $this->stopping = (string)$response["stopping"][0];
-                $this->finalizing = (string)$response["finalizing"][0];
-                $this->done = (string)$response["done"][0];
-            }
+            Helper::convertResponse($this, $response);
 		}
 	}
 
@@ -246,14 +223,7 @@ namespace FaxBroadcast\LaravelMonopondFax;
 		public $totalPages;
 
 		function __construct($response) {
-            if (is_array($response)) {
-                $this->success = (string)$response["success"][0];
-                $this->blocked = (string)$response["blocked"][0];
-                $this->failed = (string)$response["failed"][0];
-                $this->totalAttempts = (string)$response["totalAttempts"][0];
-                $this->totalFaxDuration = (string)$response["totalFaxDuration"][0];
-                $this->totalPages = (string)$response["totalPages"][0];
-            }
+            Helper::convertResponse($this, $response);
 		}
 	}
 
@@ -357,4 +327,13 @@ namespace FaxBroadcast\LaravelMonopondFax;
 	class Test2 {
 
 	}
+
+    class Helper {
+        public static function convertResponse(&$class, SimpleXMLElement $response) {
+            $response_obj = json_decode(json_encode($response), 'true');
+            foreach ($response_obj['@attributes'] as $key => $value) {
+                $class->{$key} = $value;
+            }
+        }
+    }
 ?>
