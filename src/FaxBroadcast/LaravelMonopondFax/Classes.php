@@ -124,19 +124,19 @@ class MPENV {
 		public $broadcastRef;
 		public $sendRef;
 		public $messageRef;
-		public $faxDetails;
-		public $faxResults;
+		public $FaxDetails;
+		public $FaxResults;
 
 		function __construct($faxMessageResponse) {
             Helper::convertResponse($this, $faxMessageResponse);
 
-			if ($faxMessageResponse->FaxDetails != null) {
-			   $this->faxDetails = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxDetailsResponse($faxMessageResponse->FaxDetails);
+			if ($this->FaxDetails != null) {
+			   $this->FaxDetails = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxDetailsResponse($this->FaxDetails);
 			}
 
-			if (!empty($faxMessageResponse->FaxResults)) {
-			   foreach($faxMessageResponse->FaxResults->FaxResult as $faxResult) {
-				$this->faxResults[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxResultsResponse($faxResult);
+			if (!empty($this->FaxResults)) {
+			   foreach($this->FaxResults->FaxResult as $faxResult) {
+				$this->FaxResults[] = new \FaxBroadcast\LaravelMonopondFax\MonopondFaxResultsResponse($faxResult);
 			   }
 			}
 		}
