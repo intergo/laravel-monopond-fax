@@ -1,5 +1,5 @@
 {
-    "name": "phalouvas/laravel-monopond-fax",
+    "name": "intergo/laravel-monopond-fax",
     "description": "Laravel package for monopond fax API client",
     "keywords": [
         "laravel",
@@ -11,7 +11,8 @@
     "authors": [
         {
             "name": "balgf",
-            "name": "Manny Isles"
+            "name": "Manny Isles",
+            "name": "Intergo Developers"
         }
     ],
     "require": {
