@@ -15,6 +15,7 @@
             "name": "Intergo Developers"
         }
     ],
+    "license": "MIT",
     "require": {
         "php": ">=5.5"
     },
